@@ -7,13 +7,14 @@ function Response({workspaceId, formId, fetchedForm, isLight}) {
   const [formStart, setFormStart] = useState(0)
   const [formSubmission, setFormSubmission] = useState(0)
   const [accessCount, setAccessCount] = useState(0)
+  const url = "https://formbot-backend-vlhw.onrender.com";
 
   const [submissionsArray, setSubmissionsArray] = useState([])
 
      useEffect(() => {
        const fetchFormSubmissions = async () => {
            try {
-               const response = await fetch(`http://localhost:3000/workspace/forms/${workspaceId}/${formId}/submissions`);
+               const response = await fetch(`${url}/workspace/forms/${workspaceId}/${formId}/submissions`);
                const submissionData = await response.json();
    
                console.log('Form Submissions:', submissionData);
