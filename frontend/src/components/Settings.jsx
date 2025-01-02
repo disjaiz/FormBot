@@ -32,7 +32,7 @@ function Settings() {
   } }
     const updatedData = { name, email, oldPassword, newPassword};
     try {
-      const response = await fetch('${url}/user/update', {
+      const response = await fetch(`${url}/user/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json', 
@@ -71,7 +71,7 @@ function Settings() {
 // ============================================================================================================
   const handleLogout = async () => {
     try {
-      const response = await fetch('${url}/user/logout', {
+      const response = await fetch(`${url}/user/logout`, {
         method: 'POST',
         credentials: 'include', 
       });
