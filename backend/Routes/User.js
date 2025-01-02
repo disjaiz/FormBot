@@ -65,6 +65,9 @@ router.post('/signup', async (req, res) => {
             maxAge: 5 * 60 * 60 * 1000,
             sameSite: 'None',
             secure: true,
+             expires: new Date(Date.now() + 18000000),
+            path: '/',
+  domain: '.onrender.com' ,
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -101,7 +104,8 @@ router.post('/login', async (req, res)=>{
   sameSite: 'None',
   secure: true,
   path: '/',
-  domain: '.onrender.com' 
+  domain: '.onrender.com' ,
+                 expires: new Date(Date.now() + 18000000),
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});
