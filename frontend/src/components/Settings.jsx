@@ -5,6 +5,7 @@ import { useNavigate , useLocation} from 'react-router-dom';
 
 
 function Settings() {
+     const url = "https://formbot-backend-vlhw.onrender.com";
      const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ function Settings() {
   } }
     const updatedData = { name, email, oldPassword, newPassword};
     try {
-      const response = await fetch('http://localhost:3000/user/update', {
+      const response = await fetch('${url}/user/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json', 
@@ -70,7 +71,7 @@ function Settings() {
 // ============================================================================================================
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:3000/user/logout', {
+      const response = await fetch('${url}/user/logout', {
         method: 'POST',
         credentials: 'include', 
       });
