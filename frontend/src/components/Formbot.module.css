@@ -1,0 +1,247 @@
+.container {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    height: 100vh; 
+    width: 100vw; 
+    display: flex;
+    flex-direction: column; 
+}
+.circleStyle  {
+    position: absolute;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: white;
+    transition: left 0.2s
+  }
+
+.switchStyle  {
+    position: relative;
+    width: 50px;
+    height: 21px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-left: 8px;
+    margin-right: 8px
+  }
+
+.nav {
+    width: 100%;
+    border-bottom: 0.1px solid rgb(74, 71, 71);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box; 
+    position: relative; 
+    background-color: white;
+}
+.formNameInput{
+    width: 220px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    background-color: #121212;
+    border: 1px solid rgb(74, 71, 71);
+    color: white; 
+    font-family: Open Sans;
+    z-index: 10;
+    position: absolute;
+    left: 2%;
+}
+.formNameInput:focus {
+    outline: none;
+    border: 1px solid rgb(74, 71, 71);
+}
+
+.sharebtn{
+    color: white;
+    background-color: #848890;
+    z-index: 10;
+    position: absolute;
+    right: 9.5%;
+    padding: 5px 12px;
+    border-radius: 7px;
+    border: none;
+    font-family: Open Sans;
+}
+.savebtn{
+    color: white;
+    background-color: #4ADE80CC;
+    z-index: 10;
+    position: absolute;
+    right: 4%;
+    padding: 5px 12px;
+    border-radius: 7px;
+    border: none;
+    font-family: Open Sans;
+}
+.closeImg{
+    z-index: 10;
+    position: absolute;
+    right: 1.5%;
+}
+.toggler  {
+    z-index: 10;
+    position: absolute;
+    right: 18%;
+    color: white;
+    font-family: Open Sans;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center; 
+    height: 40px; 
+ }
+
+.modes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+    padding: 4px 15px;
+  }
+
+.flowResbtn {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 12px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    font-family: Open Sans;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+.flowResbtn:hover {
+    background-color: #333;
+  }
+   
+.active {
+    border: 0.5px solid #2769f6;
+    color: #2769f6;
+  }
+
+/* ===================================BODY============================================ */
+
+.body {
+    flex: 1; 
+    display: flex;
+    color: white;
+    position: relative;
+    padding: 17px ;
+    font-family: Open Sans;
+    background-color: #1F1F23;
+    overflow: hidden; 
+}
+.sidebar {
+    width: 23%;
+    border-radius: 7px;
+    border: 1px solid rgb(105, 101, 101);
+    height: 100%; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 45px 14px 0px 14px ;
+   background-color: #18181B;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.boxHeaderDiv{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.bubblesBox{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr ;
+    margin-bottom: 15px;
+    gap: 11px;
+}
+.inputsBox{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 11px;
+}
+
+.inputBtns{
+    width: 100%;
+    padding: 10px ;
+    background-color: #1F1F23;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFFEB;
+    border: 0.5px solid rgb(43, 41, 41);
+}
+.mainContent {
+    flex: 1; 
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+.flag{
+    background-color: #18181B;
+    width: 200px;
+    margin-right: 5px;
+    margin-bottom: 25px;
+    align-items: center;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-size: 19px;
+}
+
+.card{
+    height: 100px;
+    width: 250px;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    background-color: #18181B;
+    margin-bottom: 20px;
+    padding:10px 20px 10px 20px;
+    font-family: Open Sans;
+
+}
+
+.cardInput{
+     color:rgb(23, 22, 22);
+     background-color: #1F1F23;
+     border: none;
+     width: 100%;
+     padding: 10px 40px 10px 40px;
+     font-family: Open Sans;
+     border-radius: 7px;
+}
+.cardHeader{
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+.cardDeleteButton{
+        position: absolute;
+        right: -4%;
+        top: -4%;
+        transform: translate(4%, 4%);
+        background:transparent;
+        border: none;
+        cursor: pointer;
+}

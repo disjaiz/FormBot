@@ -1,0 +1,82 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modalContent {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 60px 20px 20px 20px ;
+    border-radius: 10px;
+    width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top : 7%;
+    right: 5%;
+}
+
+.modalBody {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input {
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-family: Open Sans;
+    margin-bottom: 10px;
+}
+.dropdown{
+    position: absolute;
+    top: 0%;
+    right: 2%;
+}
+.select {
+    padding: 5px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-family: Open Sans;
+}
+
+.button {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1A5FFF;
+    color: white;
+    cursor: pointer;
+    font-family: Poppins;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+

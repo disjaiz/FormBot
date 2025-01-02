@@ -1,0 +1,75 @@
+/* ------ Folder Modal Css */
+
+.container{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.createModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgb(90, 87, 87);    
+    padding: 23px;
+    border-radius: 23px;
+    width: 30%;
+    height: 30%;
+    font-family: Open Sans; 
+}
+.deleteModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgb(90, 87, 87);    
+    padding: 23px;
+    border-radius: 23px;
+    width: 30%;
+    height: 25%;
+    font-family: Open Sans;    
+}
+.heading{
+    font-size: 22px;
+    margin-bottom: 20px;  
+    color: white;    
+}
+.input{
+    background-color: #1F1F23;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    padding: 13px 15px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    color: white;   
+}
+.input:focus {
+    outline: none;
+    border: 1px solid rgb(74, 71, 71);
+  }
+
+.btnDiv{
+    display: grid;
+    gap : 1px;
+    width: 100%;   
+    background-color: rgb(105, 102, 102); 
+    grid-template-columns: 1fr 1fr;
+}
+.done{
+    color: #4B83FF;
+    border-right: 1.5px solid rgb(90, 87, 87);
+    font-size: 22px;
+    background-color: #090909;
+    border: none;  
+}
+.cancel{
+    font-size: 22px;
+    background-color: #090909;
+    border: none;
+    color: white;
+}
