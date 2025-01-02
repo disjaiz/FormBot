@@ -1,10 +1,10 @@
-const port = 3000;
+const url = "https://formbot-backend-vlhw.onrender.com";
 
 //=============================== signup fetch ======================================
 async function signup(formdata){
 
   try{
-    const response = await fetch(`http://localhost:${port}/user/signup`, {
+    const response = await fetch(`{url}/user/signup`, {
     method: "POST",
     headers: {
         'Content-Type': 'application/json', 
@@ -25,7 +25,7 @@ export default signup;
 async function login(formdata){
   
     try{
-        const response = await fetch(`http://localhost:${port}/user/login`, {
+        const response = await fetch(`{url}/user/login`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json', 
@@ -47,7 +47,7 @@ export {login}
 async function createWorkspace(){
   
     try{
-        const response = await fetch(`http://localhost:${port}/workspace/create`, {
+        const response = await fetch(`{url}/workspace/create`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json', 
@@ -69,7 +69,7 @@ export {createWorkspace}
 async function findWorkspace(){
   
     try{
-        const response = await fetch(`http://localhost:${port}/workspace/findWorkspace`, {
+        const response = await fetch(`{url}/workspace/findWorkspace`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json', 
@@ -91,7 +91,7 @@ export {findWorkspace}
 async function deleteFolder(folderId){
   console.log('entered deleteFolder')
     try{
-      const response = await fetch(`http://localhost:${port}/workspace/deleteFolder`, {
+      const response = await fetch(`{url}/workspace/deleteFolder`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
