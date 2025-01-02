@@ -6,12 +6,13 @@ const JoinWorkspace = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const workspaceId = window.location.pathname.split('/')[2]; // Extract workspaceId from URL
     const accessLevel = queryParams.get('accessLevel'); // Get accessLevel from query params
+    const url = "https://formbot-backend-vlhw.onrender.com";
    
     useEffect(() => {
         const checkAndJoinWorkspace = async () => {
             try {
                
-                const response = await fetch(`http://localhost:3000/workspace/${workspaceId}/join?accessLevel=${accessLevel}`,
+                const response = await fetch(`${url}/workspace/${workspaceId}/join?accessLevel=${accessLevel}`,
                     {
                         method: 'GET',
                         credentials: 'include', 
