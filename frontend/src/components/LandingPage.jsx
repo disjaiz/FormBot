@@ -6,6 +6,7 @@ import styles from "./LandingPage.module.css";
 import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+  const url = "https://formbot-backend-vlhw.onrender.com";
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate('/login');
