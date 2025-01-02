@@ -293,7 +293,7 @@ const handleSaveForm = async () => {
 const handleShareForm = () => {
  // console.log(formId)
  if (formId) {
-   const shareLink = `${url}/forms/${workspaceId}/${formId}`;
+   const shareLink = `${window.location.origin}/forms/${workspaceId}/${formId}`;
    alert(`Share this link: ${shareLink}`);
 
    // Copy the link to clipboard
