@@ -3,13 +3,14 @@ import styles from "./ShareModal.module.css";
 import closeImg from '../Images/close.png';
 
 const ShareModal = ({ workspaceId, closeModal , isLight }) => {
+    const url = "https://formbot-backend-vlhw.onrender.com";
     const [email, setEmail] = useState("");
     const [accessLevel, setAccessLevel] = useState("edit");
     const [link, setLink] = useState('');
  
   const handleSendInvite = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/workspace/${workspaceId}/invite`, {
+        const response = await fetch(`${url}/workspace/${workspaceId}/invite`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
