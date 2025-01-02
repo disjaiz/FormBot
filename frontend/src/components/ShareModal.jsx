@@ -42,7 +42,7 @@ const ShareModal = ({ workspaceId, closeModal , isLight }) => {
 
     // Handle generating a shareable link
     const handleGenerateLink = () => {
-        const generatedLink = `http://localhost:5173/login?returnUrl=/workspace/${workspaceId}/join?accessLevel=${accessLevel}`;
+        const generatedLink = `https://formbot-xyi7.onrender.com/login?returnUrl=/workspace/${workspaceId}/join?accessLevel=${accessLevel}`;
         setLink(generatedLink);
         navigator.clipboard.writeText(generatedLink);
         alert('Link copied to clipboard');
