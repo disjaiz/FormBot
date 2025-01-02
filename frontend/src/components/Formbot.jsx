@@ -41,7 +41,7 @@ function Formbot() {
 // =======================================================================
    const fetchForm = async (workspaceId, formID) => {
      try {
-       const response = await fetch('${url}/workspace/form', {
+       const response = await fetch(`${url}/workspace/form`, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          credentials: 'include',
@@ -256,7 +256,7 @@ const handleSaveForm = async () => {
    // If formId exists, update existing form, otherwise create new
    const endpoint = formId 
      ? `${url}/workspace/updateForm/${formId}`
-     : '${url}/workspace/saveForm';
+     :  `${url}/workspace/saveForm`;
    
    const method = formId ? 'PUT' : 'POST';
    
