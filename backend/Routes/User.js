@@ -96,13 +96,12 @@ router.post('/login', async (req, res)=>{
             const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:"5h"});
             // store token in cokkie
             res.cookie('Token', token, {
-                httpOnly:true, 
-                maxAge:5 * 60 * 60 * 1000,
-                // sameSite: 'None', 
-                // secure: true,
-                 sameSite: 'None', 
-    secure: true,
-                path: '/',   
+               httpOnly: true,
+  maxAge: 5 * 60 * 60 * 1000,
+  sameSite: 'None',
+  secure: true,
+  path: '/',
+  domain: '.onrender.com' 
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});
