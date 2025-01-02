@@ -76,6 +76,7 @@ router.post('/signup', async (req, res) => {
 // ======================================login===============================================================
 router.post('/login', async (req, res)=>{
     const { email, password } =   req.body;
+    const isProduction = true;
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
@@ -99,8 +100,8 @@ router.post('/login', async (req, res)=>{
                 maxAge:5 * 60 * 60 * 1000,
                 // sameSite: 'None', 
                 // secure: true,
-                sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    secure: process.env.NODE_ENV === 'production',
+                sameSite: isProduction ? 'None' : 'Lax',
+    secure: isProduction,
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});
