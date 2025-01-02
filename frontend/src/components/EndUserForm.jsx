@@ -30,7 +30,7 @@ if (shouldIncrement) {
 }
         const trackFormLinkAccess = async () => {
             try {
-                const response = await fetch(`$url}/workspace/track-form-access/${workspaceId}/${formId}`, {
+                const response = await fetch(`${url}/workspace/track-form-access/${workspaceId}/${formId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ shouldIncrement }),
@@ -47,7 +47,7 @@ if (shouldIncrement) {
 
         const fetchForm = async () => {
             try {
-                const response = await fetch(`$url}/workspace/forms/${workspaceId}/${formId}`);
+                const response = await fetch(`${url}/workspace/forms/${workspaceId}/${formId}`);
                 if (response.status === 404) {
                     setFormElements([]);
                     return;
@@ -99,7 +99,7 @@ if (shouldIncrement) {
             setFirstInputSubmissions(prev => prev + 1); // Increment only once
 
             try {
-                await fetch(`$url}/workspace/track-form-event/${workspaceId}/${formId}`, {
+                await fetch(`${url}/workspace/track-form-event/${workspaceId}/${formId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ type: 'start' }),
@@ -119,7 +119,7 @@ if (shouldIncrement) {
         setFinalFormSubmissions(prev => prev + 1); // Increment form submission count
 
         try {
-            await fetch(`$url}/workspace/track-form-event/${workspaceId}/${formId}`, {
+            await fetch(`${url}/workspace/track-form-event/${workspaceId}/${formId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ type: 'final' }),
@@ -131,7 +131,7 @@ if (shouldIncrement) {
 
 
         try {
-            const response = await fetch(`$url}/workspace/forms/${workspaceId}/${formId}/submit`,
+            const response = await fetch(`${url}/workspace/forms/${workspaceId}/${formId}/submit`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
