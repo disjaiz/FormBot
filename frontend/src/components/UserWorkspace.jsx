@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import ShareModal from "./ShareModal";
 
 export default function UserWorkspace() {
+  const url = "https://formbot-backend-vlhw.onrender.com";
   const [workspaceId, setWorkspaceId] = useState(null);
   const [accessLevel, setAccessLevel] = useState(null);
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function UserWorkspace() {
   const handleDeleteFolder = async (folderId) => {
     console.log('folderid:',  folderId)
     try {
-      const response = await fetch("http://localhost:3000/workspace/deleteFolder", {
+      const response = await fetch("${url}/workspace/deleteFolder", {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ export default function UserWorkspace() {
   const handleDeleteForm = async (formId) => {
     console.log('formid:',  formId)
     try {
-      const response = await fetch("http://localhost:3000/workspace/deleteForm", {
+      const response = await fetch("${url}/workspace/deleteForm", {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ export default function UserWorkspace() {
 useEffect(() => {
   const fetchDefaultWorkspace = async () => {
     try {
-      const response = await fetch('http://localhost:3000/workspace/find', {
+      const response = await fetch('${url}/workspace/find', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -178,7 +179,7 @@ if (ownerWorkspace) {
 
   const handleAddFolder = async (folderName) => {
     try {
-      const response = await fetch('http://localhost:3000/workspace/addFolder', {
+      const response = await fetch('${url}/workspace/addFolder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -218,7 +219,7 @@ const handleSelectChange = async (selectedWorkspaceId) => {
     default:
       try {
         // Fetch the details of the selected workspace
-        const workspaceResponse = await fetch(`http://localhost:3000/workspace/details/${selectedWorkspaceId}`, {
+        const workspaceResponse = await fetch(`${url}/workspace/details/${selectedWorkspaceId}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -246,7 +247,7 @@ const handleSelectChange = async (selectedWorkspaceId) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:3000/user/logout', {
+      const response = await fetch('${url}/user/logout', {
         method: 'POST',
         credentials: 'include', 
       });
