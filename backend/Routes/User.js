@@ -66,8 +66,8 @@ router.post('/signup', async (req, res) => {
             sameSite: 'None',
             secure: true,
              expires: new Date(Date.now() + 18000000),
-            path: '/',
-  domain: '.onrender.com' ,
+  //           path: '/',
+  // domain: '.onrender.com' ,
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
