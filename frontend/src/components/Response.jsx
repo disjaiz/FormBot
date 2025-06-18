@@ -7,7 +7,7 @@ function Response({workspaceId, formId, fetchedForm, isLight}) {
   const [formStart, setFormStart] = useState(0)
   const [formSubmission, setFormSubmission] = useState(0)
   const [accessCount, setAccessCount] = useState(0)
-  const url = "https://formbot-backend-vlhw.onrender.com";
+  const url = import.meta.env.VITE_BACKEND_URL;
 
   const [submissionsArray, setSubmissionsArray] = useState([])
 

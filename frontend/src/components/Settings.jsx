@@ -5,7 +5,7 @@ import { useNavigate , useLocation} from 'react-router-dom';
 
 
 function Settings() {
-     const url = "https://formbot-backend-vlhw.onrender.com";
+    const url = import.meta.env.VITE_BACKEND_URL;
      const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

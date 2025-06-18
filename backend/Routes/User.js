@@ -66,8 +66,6 @@ router.post('/signup', async (req, res) => {
             sameSite: 'None',
             secure: true,
              expires: new Date(Date.now() + 18000000),
-  //           path: '/',
-  // domain: '.onrender.com' ,
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -99,13 +97,14 @@ router.post('/login', async (req, res)=>{
             const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:"5h"});
             // store token in cokkie
             res.cookie('Token', token, {
-               httpOnly: true,
-  maxAge: 5 * 60 * 60 * 1000,
-  sameSite: 'None',
-  secure: true,
-  path: '/',
-  domain: '.onrender.com' ,
-                 expires: new Date(Date.now() + 18000000),
+              maxAge: 5 * 60 * 60 * 1000,
+              httpOnly: true,
+              sameSite: 'None',
+              secure: true,
+
+//                 secure: false,
+//  sameSite: 'Lax',
+              expires: new Date(Date.now() + 18000000),
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});

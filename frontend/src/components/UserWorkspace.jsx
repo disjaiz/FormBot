@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import ShareModal from "./ShareModal";
 
 export default function UserWorkspace() {
-  const url = "https://formbot-backend-vlhw.onrender.com";
+  const url = import.meta.env.VITE_BACKEND_URL;
   const [workspaceId, setWorkspaceId] = useState(null);
   const [accessLevel, setAccessLevel] = useState(null);
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ import { createWorkspace } from '../FetchMakers';
 import Toast from '../Toast';
 
 function Signup() {
-   const url = "https://formbot-backend-vlhw.onrender.com";
+   const url = import.meta.env.VITE_BACKEND_URL;
    const navigate = useNavigate();
    const [formData, setformData] = useState({
     username:"",

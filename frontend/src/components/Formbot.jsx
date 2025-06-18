@@ -15,7 +15,7 @@ import flag from '../Images/flag.png';
 import Response from './Response';
 
 function Formbot() {
-  const url = "https://formbot-backend-vlhw.onrender.com";
+  const url = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation();
    const navigate = useNavigate();
    const [formSaved, setFormSaved] = useState(false);

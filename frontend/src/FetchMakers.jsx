@@ -1,4 +1,4 @@
-const url = "https://formbot-backend-vlhw.onrender.com";
+const url = import.meta.env.VITE_BACKEND_URL;
 
 //=============================== signup fetch ======================================
 async function signup(formdata){

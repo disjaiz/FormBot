@@ -3,7 +3,7 @@ import styles from "./ShareModal.module.css";
 import closeImg from '../Images/close.png';
 
 const ShareModal = ({ workspaceId, closeModal , isLight }) => {
-    const url = "https://formbot-backend-vlhw.onrender.com";
+    const url = import.meta.env.VITE_BACKEND_URL;
     const [email, setEmail] = useState("");
     const [accessLevel, setAccessLevel] = useState("edit");
     const [link, setLink] = useState('');

@@ -14,7 +14,7 @@ const EndUserForm = () => {
 
     const [finalFormSubmissions, setFinalFormSubmissions] = useState(0);
     const [submittedInputs, setSubmittedInputs] = useState(new Set());
-    const url = "https://formbot-backend-vlhw.onrender.com";
+    const url = import.meta.env.VITE_BACKEND_URL;
 
     
     useEffect(() => {
