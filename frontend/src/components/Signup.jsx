@@ -111,6 +111,7 @@ function Signup() {
                value={formData.confirmPassword} onChange={(e)=>setformData({...formData, [e.target.name]: e.target.value})}/><br />
    
                <button type='submit' className={styles.buttons}>Signup</button><br/>
+               {error && <p style={{ color: "red" , fontWeight: "300", fontSize:'14px'}}>{error}</p>}
                <div style={{textAlign:'center', fontSize:'13px', marginTop:'5px'}}><span>OR</span></div><br/>
    
                <button type="button" className={styles.buttons}>
