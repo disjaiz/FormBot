@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 import signup from '../FetchMakers';
 import { createWorkspace } from '../FetchMakers';
+import Toast from '../Toast';
 
 function Signup() {
    const url = "https://formbot-backend-vlhw.onrender.com";
@@ -23,15 +24,17 @@ function Signup() {
     password: "",
     confirmPassword: ""
   })
+   const [error, setError] = useState(null);
+   const [toast, setToast] = useState(null);
       // handle signup=======================================
        const handleSignup = async (e) => {
         e.preventDefault()
         
+      try{
         const response = await signup(formData)
         const signupData = await response.json();
 
         if (response.status === 200) {
-          alert('signed up successfully!');
 
               // create workspace
               // const Wresponse = await createWorkspace({workspaceName: formData.username, userId: signupData.user._id})
@@ -39,28 +42,35 @@ function Signup() {
               const data = await Wresponse.json();
 
               if (Wresponse.status === 200) {
-                alert('Workspace created successfully!');
                 navigate('/userWorkspace',  { state: { username: formData.username }});
               }
               else if (Wresponse.status === 400) {
-                alert('Error in input data');
+                setToast('Error in input data!');
                 console.log(data)
               }
               else {
-                alert('Error creating workspace!');
-                console.error(data); 
+                setToast('Error creating workspace!');
+                console.log(data)
               } 
             }
         else if (response.status === 400) {
-          alert('Error in input data');
-          console.log(signupData)
+          setError(signupData.msg || "Unknown error.");
+          console.log(signupData);
         }
-
         else {
-          alert('Error adding data!');
+          setError("Something went wrong. Please try again.");
           console.error(signupData); 
       }
-    }
+    }catch(err){
+      switch (err.message) {
+            case "network_error":
+              setError("No internet or server is unreachable.");
+              break;
+            default:
+              setError("Unexpected error. Please try again later.");
+          }
+  }
+  }
   
       // handle login=======================================
       const handleLogin = () => {
@@ -68,12 +78,25 @@ function Signup() {
       }
   return (
    <div className={styles.container}>
+        {toast && (
+            <Toast
+              message={toast}
+              duration={3000}
+              onClose={() => setToast(null)}
+              bgColor={"red"}
+            />
+          )}
    
            <form onSubmit={handleSignup} className={styles.form}>
 
               <label htmlFor="username" className={styles.lable}>Username</label><br/>
               <input required type="text" name='username' placeholder='Enter a username' className={styles.inputField}  
-              value={formData.username} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})}/><br/>
+                  value={formData.username} onChange={(e) => {
+                    const { name, value } = e.target;
+                    const capitalized = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+                    setformData({ ...formData, [name]: capitalized });
+                  }}
+                  /><br/>
            
                <label htmlFor="email" className={styles.lable}>Email</label><br/>
                <input required type="email" name='email' placeholder='Enter your email' className={styles.inputField} 
@@ -91,8 +114,9 @@ function Signup() {
                <div style={{textAlign:'center', fontSize:'13px', marginTop:'5px'}}><span>OR</span></div><br/>
    
                <button type="button" className={styles.buttons}>
-                    <img src={googleIconBg} alt="bg" className={styles.gImgBg}/>
-                    <img src={googleIcon} alt="googleicon" className={styles.gImgFront}/> 
+                      <div className={styles.gImgBg}>
+                      <img src={googleIcon} alt="googleicon" className={styles.gImgFront}/> 
+                    </div>
                    Sign in with Google</button><br/>
    
                <div style={{textAlign:'center'}}>
