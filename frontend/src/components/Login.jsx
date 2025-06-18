@@ -103,6 +103,7 @@ function Login() {
           value={formData.password} onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}/><br />
 
         <button type='submit' className={styles.buttons}>Log in</button><br/>
+            {error && <p style={{ color: "red" , fontWeight: "300"}}>{error}</p>}
         <div style={{ textAlign: 'center', fontSize: '13px', marginTop: '5px' }}><span>OR</span></div><br/>
 
         <button type="button" className={styles.buttons}>
