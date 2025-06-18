@@ -10,6 +10,7 @@ import backArrow from '../Images/arrowBack.png';
 import { useNavigate,  useLocation } from 'react-router-dom';
 import {login} from '../FetchMakers';
 import { findWorkspace } from '../FetchMakers';
+import Toast from '../Toast';
 
 import Cookies from 'js-cookie';
 function Login() {
@@ -20,24 +21,25 @@ function Login() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
+  const [toast, setToast] = useState(null);
 
   // handle login
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const response = await login(formData);
-    const logindata = await response.json();
+    try{
+      const response = await login(formData);
+      const logindata = await response.json();
 
-    if (response.status === 200) {
-      console.log('login successfully:');
+      if (response.status === 200) {
 
       // Find workspace 
       const Wresponse = await findWorkspace();
       const workspaceData = await Wresponse.json();
 
       if (Wresponse.status === 200) {
-        console.log(workspaceData.workspace.workspaceName);
-
+        // console.log(workspaceData.workspace.workspaceName);
         const token = Cookies.get('Token');
 
         // Get returnUrl from query params
@@ -53,16 +55,26 @@ function Login() {
         }
        
       } else {
-        alert('Error finding workspace!');
-        console.error(workspaceData);
+        setToast('Error finding workspace!');
       }
-    } else if (response.status === 400) {
-      alert(logindata.msg);
-      console.log(logindata);
-    } else {
-      alert('Error adding data!');
-      console.error(logindata);
-    }
+      }
+      else if (response.status === 400) {
+        setError(logindata.msg || "Unknown error.");
+        console.log(logindata);
+      } 
+      else {
+        setError("Something went wrong. Please try again.");
+        console.error(logindata);
+      }
+  }catch(err){
+      switch (err.message) {
+            case "network_error":
+              setError("No internet or server is unreachable.");
+              break;
+            default:
+              setError("Unexpected error. Please try again later.");
+          }
+  }
   };
 
   // handle register
@@ -72,6 +84,15 @@ function Login() {
 
   return (
     <div className={styles.container}>
+          {toast && (
+        <Toast
+          message={toast}
+          duration={3000}
+          onClose={() => setToast(null)}
+          bgColor={"red"}
+        />
+      )}
+
       <form onSubmit={handleLogin} className={styles.form}>
         <label htmlFor="email" className={styles.lable}>Email</label><br/>
         <input required type="email" name='email' placeholder='Enter your email' className={styles.inputField}
@@ -85,8 +106,9 @@ function Login() {
         <div style={{ textAlign: 'center', fontSize: '13px', marginTop: '5px' }}><span>OR</span></div><br/>
 
         <button type="button" className={styles.buttons}>
-          <img src={googleIconBg} alt="bg" className={styles.gImgBg}/>
-          <img src={googleIcon} alt="googleicon" className={styles.gImgFront}/> 
+          <div className={styles.gImgBg}>
+            <img src={googleIcon} alt="googleicon" className={styles.gImgFront}/> 
+          </div>
           Sign in with Google
         </button><br/>
 
