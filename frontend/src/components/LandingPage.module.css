@@ -3,8 +3,9 @@
     background-color: rgb(15, 15, 46);
     margin: 0;
     padding: 0;
-    /* height: 100vh; */
+    height: auto;
     width: 100vw;
+    height: auto;
 }
 
 .navbar {
@@ -19,8 +20,7 @@
 .navButtons{
     display: flex;
     justify-content: space-between;
-    gap: 15px;
-      
+    gap: 15px; 
 }
 
 .signIn{
@@ -60,15 +60,12 @@
 }
 .footer{
     margin-top: 120px;
-    margin-top: 120px;
-    padding-top: 20px;
     height: 300px;
     width: 100%;
     color: #ece2e2;
     display: flex;
     justify-content: center;  
    font-family: Open Sans;
-   
 }
 .footerSubDiv{
     display: flex;
@@ -76,9 +73,74 @@
     width: 60%;
     height: 100%;
 }
-
 .footerList{
     list-style-type: none;
     line-height: 31px;
     font-size: 15px;
+}
+.footerList .listHeading{
+    font-family: Outfit;
+    font-weight: 700px;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .semiCircle{
+        display: none;
+    }
+    .navbar {
+        padding: 20px 20px;
+    }
+    .navButtons{
+        flex-direction: column;
+        gap: 10px; 
+    }
+    .footer{
+        margin-top: 50px;
+        height: auto;
+    }
+     .footerSubDiv {
+        flex-direction: column;
+        padding-left: 20px;
+        width: 100%;
+    }
+    .footerList {
+        text-align: left;
+        font-size: 13px;
+        line-height: 23px;
+        margin-bottom: 20px;
+    }
+    .footerList .listHeading{
+        font-weight: 800px;
+        margin-bottom: 1px;
+    }
+}
+
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+    .semiCircle{
+        display: none;
+    }
+    .navbar {
+        padding: 20px 30px;
+    }
+    .footer{
+        margin-top: 100px;
+    }
+     .footerSubDiv {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    .footerList {
+        text-align: left;
+        font-size: 13px;
+        line-height: 23px;
+        margin-bottom: 20px;
+    }
+    .footerList .listHeading{
+        font-weight: 600px;
+        margin-bottom: 10px;
+    }
 }

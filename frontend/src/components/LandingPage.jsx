@@ -37,19 +37,19 @@ function LandingPage() {
           <div className={styles.footerSubDiv}>
 
             <ul className={styles.footerList}> 
-              <li style={{fontFamily: 'Outfit', fontWeight: '700px', fontSize: '19px' , marginBottom: '10px'}}>FormBot</li>
+              <li className={styles.listHeading}>FormBot</li>
               <li>Made with ❤️ by</li>
-              <li> @cuvette</li>
+              <li> Siddhi</li>
             </ul>
             <ul className={styles.footerList} >
-                <li style={{fontFamily: 'Outfit', fontWeight: '700px', fontSize: '19px', marginBottom: '10px'}}>Product</li>
+                <li className={styles.listHeading}>Product</li>
                 <li>Status &nbsp;<i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
                 <li>Documentation &nbsp;<i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
                 <li>Roadmap &nbsp; <i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
                 <li>Pricing</li>
             </ul>
             <ul className={styles.footerList}>
-              <li style={{fontFamily: 'Outfit', fontWeight: '700px', fontSize: '19px', marginBottom: '10px'}}>Community</li>
+              <li className={styles.listHeading}>Community</li>
               <li>Discord &nbsp; <i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
               <li>GitHub Repository &nbsp;<i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
               <li>Twitter &nbsp;<i className="fa-solid fa-arrow-up-right-from-square" style={{color: '#ffffff'}}></i></li>
@@ -57,7 +57,7 @@ function LandingPage() {
               <li>OSS Friends</li>
             </ul>
             <ul className={styles.footerList}>
-              <li style={{fontFamily: 'Outfit', fontWeight: '700px', fontSize: '19px', marginBottom: '10px'}}>Company</li>
+              <li className={styles.listHeading}>Company</li>
               <li>About</li>
               <li>Contact</li>
               <li>Terms of Service</li>
