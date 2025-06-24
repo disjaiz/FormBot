@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import styles from './UserWorkspace.module.css';
-import folderSvg from '../Images/folderSvg.png';
+import lightModeImg from '../Images/light-mode.png';
+import darkModeImg from '../Images/night-mode.png';
+import FolderSvg from './FolderSvg.jsx';
 import plusSvg from '../Images/plusSvg.png';
 import deleteImg from '../Images/delete.png';
 import { useLocation } from 'react-router-dom';
@@ -9,8 +11,10 @@ import FolderDeleteModal from './FolderDeleteModal';
 import FormDeleteModal from './FormDeleteModal';
 import { useNavigate } from 'react-router-dom';
 import ShareModal from "./ShareModal";
+import Toast from '../Toast';
 
 export default function UserWorkspace() {
+  const [toast, setToast] = useState(null);
   const url = import.meta.env.VITE_BACKEND_URL;
   const [workspaceId, setWorkspaceId] = useState(null);
   const [accessLevel, setAccessLevel] = useState(null);
@@ -271,33 +275,41 @@ const handleSelectChange = async (selectedWorkspaceId) => {
   }
 
   return (
-    <div className={styles.container}  style={{backgroundColor: isLight ? 'white': '#121212'}}>
+    <div className={styles.container}  style={{backgroundColor: isLight ? '#F9FAFB': '#121212'}}>
+
+    {toast && (
+        <Toast
+          message={toast.message}
+          duration={30000}
+          onClose={() => setToast(null)}
+          bgColor={toast.bg}  
+        />
+      )}
+
       <nav className={styles.nav} >
 
-
-
-<select
-value={workspaceId || ''}
-  name="dropdown"
-  className={styles.dropdownSelect}
-  onChange={(e) => handleSelectChange(e.target.value)}
-  style={{
-    backgroundColor: isLight ? 'white' : '#121212',
-    color: isLight ? 'black' : 'white',
-    border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)',
-  }}
->
-  <option value="settings">Settings</option>
-  <option value="logout">Log out</option>
-  
-  {/* Dynamically render user's workspaces */}
-  {workspaces.map((workspace) => (
-    <option key={workspace.workspaceId} value={workspace.workspaceId}>
-      {workspace.accessLevel === 'owner'? `${username}'s Workspace` : `${workspace.workspaceName} (Shared - ${workspace.accessLevel})`}
-    </option>
-  ))}
-</select>
-
+        <select
+            value={workspaceId || ''}
+            name="dropdown"
+            className={styles.dropdownSelect}
+            onChange={(e) => handleSelectChange(e.target.value)}
+            style={{
+              backgroundColor: isLight ? 'white' : '#121212',
+              color: isLight ? 'black' : 'white',
+              border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)',
+            }}
+          >
+            <option value="settings">Settings</option>
+            <option value="logout">Log out</option>
+          
+            {/* Dynamically render user's workspaces */}
+            {workspaces.map((workspace) => (
+              <option key={workspace.workspaceId} value={workspace.workspaceId}>
+                {workspace.accessLevel === 'owner'? `${username}'s Workspace` : `${workspace.workspaceName} (Shared - ${workspace.accessLevel})`}
+              </option>
+            ))}
+        </select>
+        
       {/*===================== toggler========================================= */}
         <div className={styles.toggler}>
            <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Dark</span>
@@ -307,11 +319,25 @@ value={workspaceId || ''}
            <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Light</span>
         </div>
 
+        {/* Mobile toggle */}
+        <div className={styles.mobileToggle} onClick={() => setIsLight(!isLight)}>
+          <img
+            src={isLight ? darkModeImg : lightModeImg}
+            alt="theme toggle"
+            className={styles.toggleImage}
+          />
+        </div>
+
         {/* =====================share btn================================================== */}
         <div className={styles.sharebtn} onClick={handleShare}> Share </div>
-
-        {showShareModal && <ShareModal workspaceId={workspaceId} closeModal={closeModal}  isLight={isLight}/>}
-
+        {showShareModal && (
+          <ShareModal
+            workspaceId={workspaceId}
+            closeModal={closeModal}
+            isLight={isLight}
+            setToast={setToast}
+          />
+        )}
       </nav>
 
       {/* =====================dashboard body========================================= */}
@@ -319,21 +345,22 @@ value={workspaceId || ''}
           <div className={styles.dashboardBodyInner}>
 
           <div className={styles.allFolders}>
-          {accessLevel !== 'view' && (
-            <button className={styles.createfolderbtn} onClick={() => setIsModalOpen(true)} 
-            style={{backgroundColor: isLight ? 'white': '#3b3a3a', color: isLight ? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : 'none'}}>
-              <img src={folderSvg} style={{marginRight:'6px'}}/>
-              <p style={{fontFamily:'Open Sans'}}>Create a Folder</p>
-            </button>
-            )}
+            {accessLevel !== 'view' && (
+              <button className={styles.createfolderbtn} onClick={() => setIsModalOpen(true)} 
+              style={{backgroundColor: isLight ? 'white': '#3b3a3a', color: isLight ? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : 'none'}}>
+                {/* <img src={foldersvg} style={{ marginRight:'6px'}}/> */}
+                <FolderSvg fill={isLight ? 'black': 'white'} style={{marginRight:'6px'}} />
+                <p style={{fontFamily:'Open Sans'}}>Create a Folder</p>
+              </button>
+              )}
 
             {folders.map((folder, index) => (
-                <div key={index} className={styles.folderNameDiv} style={{backgroundColor: isLight ? 'white': '#3b3a3a', color: isLight ? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : 'none'}} >
-                    <p  style={{fontSize: '15px', marginRight:'8px', }}>{folder.folderName}</p>
-                    <img src={deleteImg} alt="deleteImg" onClick={(e) => {e.stopPropagation(); handleRemoveFolder(folder._id, folder.folderName)}}/>
-                </div>
-              ))}
-        </div>  
+                  <div key={index} className={styles.folderNameDiv} style={{backgroundColor: isLight ? 'white': '#3b3a3a', color: isLight ? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : 'none'}} >
+                      <p  style={{fontSize: '15px', marginRight:'8px', }}>{folder.folderName}</p>
+                      <img src={deleteImg} alt="deleteImg" onClick={(e) => {e.stopPropagation(); handleRemoveFolder(folder._id, folder.folderName)}}/>
+                  </div>
+                ))}
+          </div>  
 
         <FolderModal
           isOpen={isModalOpen}
@@ -341,15 +368,15 @@ value={workspaceId || ''}
           onSubmit={handleAddFolder}
           isLight={isLight}
         />
-     {/* Delete Confirmation Modal */}
-      <FolderDeleteModal
-        isOpen={showFolderModal}
-        onClose={handleCloseFolderModal}
-        onConfirm={handleConfirmDeleteFolder}
-        isLight={isLight}
-      />
+       {/* Delete Confirmation Modal */}
+        <FolderDeleteModal
+          isOpen={showFolderModal}
+          onClose={handleCloseFolderModal}
+          onConfirm={handleConfirmDeleteFolder}
+          isLight={isLight}
+        />
 {/* =================================form bot=========================================== */}
-        <div className={styles.allForms}>
+      <div className={styles.allForms}>
         {accessLevel !== 'view' && (
            <div className={styles.typeBotBtn} onClick={handleCreateTypebot}>
             <img src={plusSvg} style={{height:'30px', width:'30px', marginBottom:'14px'}} />   
@@ -366,7 +393,8 @@ value={workspaceId || ''}
               <img src={deleteImg} className={styles.deleteFormbtn}  onClick={(e) => {e.stopPropagation();  handleRemoveForm(form._id, form.formName)}}/>
             </div>
           ))}
-</div>
+       </div>
+
       <FormDeleteModal 
         isOpen={showFormModal}
         onClose={handleCloseFormModal}

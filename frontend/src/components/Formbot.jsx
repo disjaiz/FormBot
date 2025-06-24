@@ -13,9 +13,13 @@ import atTheRate from '../Images/@.png';
 import buttons from '../Images/buttons.png';
 import flag from '../Images/flag.png';
 import Response from './Response';
+import Toast from '../Toast';
+import lightModeImg from '../Images/light-mode.png';
+import darkModeImg from '../Images/night-mode.png';
 
 function Formbot() {
-  const url = import.meta.env.VITE_BACKEND_URL;
+  const [toast, setToast] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation();
    const navigate = useNavigate();
    const [formSaved, setFormSaved] = useState(false);
@@ -41,7 +45,7 @@ function Formbot() {
 // =======================================================================
    const fetchForm = async (workspaceId, formID) => {
      try {
-       const response = await fetch(`${url}/workspace/form`, {
+       const response = await fetch(`${backendUrl}/workspace/form`, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          credentials: 'include',
@@ -146,7 +150,8 @@ const handleUpdateElement = (id, newContent) => {
        return {
          ...element,
          content: newContent,
-         header: element.type === "image" ? element.header : newContent || element.header,
+        //  header: element.type === "image" ? element.header : newContent || element.header,
+        header: element.header,
        };
      }
      return element;
@@ -188,6 +193,7 @@ const renderElement = (element) => {
      </button>
 
      {/* Card Content */}
+     
      {element.type === "text" && (
        <>
          <p className={styles.cardHeader} style={{color: isLight? 'black':'white'}}>{element.header}</p>
@@ -233,31 +239,33 @@ const renderElement = (element) => {
 const handleSaveForm = async () => {
  console.log(accessLevel);
  if (accessLevel !== 'edit' && accessLevel !== 'owner') {
-   alert("You do not have permission to save this form.");
-   return;}
-
+   setToast("You do not have permission to save this form.");
+   return;
+  }
    if (!workspaceId) {
-     alert("Workspace ID not found!");
+     setToast({message:"Workspace ID not found!", bg:"red"});
      return;
    }
 
    if (!formName || formElements.length === 0 || !formElements.some(el => el.type.startsWith("input-") && el.type.startsWith('input-button'))) {
-     alert("Please provide a form name, a button and at least one input element ");
+     setToast({message:"Please provide a form name, a button and at least one input element ", bg:"red"});
      return;
    }
+   console.log('Saving form with elements:', formElements);
 
  const formData = formElements.map((el) => ({
          type: el.type,  // This can now include 'input-phone', 'input-email', etc.
-         value: el.content || '',  // Ensure value is set, it can be empty for input fields
+        //  value: el.content || '',  
+         value:el.type.startsWith("input-") ? el.header : el.content || '',
          inputType: el.type.startsWith("input-") ? el.type.split("-")[1] : null,
        }));
        console.log('formdata', formData);
  try {
    // If formId exists, update existing form, otherwise create new
    const endpoint = formId 
-     ? `${url}/workspace/updateForm/${formId}`
-     :  `${url}/workspace/saveForm`;
-   
+     ? `${backendUrl}/workspace/updateForm/${formId}`
+     :  `${backendUrl}/workspace/saveForm`;
+
    const method = formId ? 'PUT' : 'POST';
    
    const response = await fetch(endpoint, {
@@ -283,10 +291,11 @@ const handleSaveForm = async () => {
      setFormSaved(true);
    console.log(savedForm.formId);
    console.log(formId);
-   alert('form saved')
-   
+   setToast({ message:'Form saved!', bg:'green' });
+
  } catch (error) {
    console.error('Error saving form:', error.message);
+  setToast({ message:'Error saving form. Please try again.', bg:'red' });
  }
 };
 
@@ -294,11 +303,11 @@ const handleShareForm = () => {
  // console.log(formId)
  if (formId) {
    const shareLink = `${window.location.origin}/forms/${workspaceId}/${formId}`;
-   alert(`Share this link: ${shareLink}`);
-
+  //  alert(`Share this link: ${shareLink}`);
+  //  setToast({ message: 'Link copied to clipboard!', bg: 'green' });
    // Copy the link to clipboard
    navigator.clipboard.writeText(shareLink).then(() => {
-     alert("Link copied to clipboard!");
+    setToast({ message: 'Link copied to clipboard!', bg: 'green' });
    }).catch(err => {
      console.error('Failed to copy the link: ', err);
    });
@@ -307,53 +316,79 @@ const handleShareForm = () => {
 
 
  return (
-  
-   <div className={styles.container}  style={{backgroundColor: isLight ? 'white': '#121212'}} >
-       <nav className={styles.nav} style={{backgroundColor: isLight ? 'white': '#121212'}}>
+  <div className={styles.container}  style={{backgroundColor: isLight ? 'white': '#121212'}} >
+     {toast && (
+            <Toast
+              message={toast.message}
+              duration={30000}
+              onClose={() => setToast(null)}
+              bgColor={toast.bg}
+            />
+          )}
+
+      <nav className={styles.nav} style={{backgroundColor: isLight ? 'white': '#121212'}}>
         {/* ================input form name======== -=======================================*/}
-   
-        {mode === 'Flow' &&    <input type="text" id="name" name="name"  className={styles.formNameInput} placeholder='Enter Form Name' required   value={formName}
-              onChange={(e) => setFormName(e.target.value)} 
-               style={{backgroundColor: isLight ? 'white': '#121212' , color: isLight? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}/>
- }
-        {/* =======================FLOW and RES modes======================================= */} 
-       <div className={styles.modes} style={{backgroundColor: isLight ? 'white': '#121212'}} >
-        <button
-         className={`${styles.flowResbtn} ${mode === "Flow" ? styles.active : ""}`}
-            onClick={() => toggleMode("Flow")}
-             style={{backgroundColor: isLight ? 'white': '#121212', color: isLight ? (mode === "Flow" ? '#2769f6' : 'black') : 'white',}} >
-        Flow
-       </button>
-        <button
-            className={`${styles.flowResbtn} ${mode === "Response" ? styles.active : ""}`}
-            onClick={() => toggleMode("Response")} 
-             style={{backgroundColor: isLight ? 'white': '#121212', color: isLight ? (mode === "Response" ? '#2769f6' : 'black') : 'white',}} >
-         Response
-        </button>
-        </div>
+          {mode === 'Flow' && (
+             <input type="text" 
+                    maxLength={25}
+                    id="name" 
+                    name="name"  
+                    className={styles.formNameInput} 
+                    placeholder='Enter Form Name' 
+                    required   value={formName}
+                    onChange={(e) => setFormName(e.target.value)} 
+                    style={{backgroundColor: isLight ? 'white': '#121212' , color: isLight? 'black': 'white', border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}
+                    />
+           )}
+            {/* =======================FLOW and RES modes======================================= */} 
+           <div className={styles.modes} style={{backgroundColor: isLight ? 'white': '#121212'}} >
+            <button
+             className={`${styles.flowResbtn} ${mode === "Flow" ? styles.active : ""}`}
+                onClick={() => toggleMode("Flow")}
+                 style={{backgroundColor: isLight ? 'white': '#121212', color: isLight ? (mode === "Flow" ? '#2769f6' : 'black') : 'white',}} >
+            Flow
+           </button>
+            <button
+                className={`${styles.flowResbtn} ${mode === "Response" ? styles.active : ""}`}
+                onClick={() => toggleMode("Response")} 
+                 style={{backgroundColor: isLight ? 'white': '#121212', color: isLight ? (mode === "Response" ? '#2769f6' : 'black') : 'white',}} >
+             Response
+            </button>
+            </div>
 
-   {/* toggler==================toggle theme======================= */}
-      <div className={styles.toggler}>
-          <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Dark</span>
-          <button className={styles.switchStyle}  style={{backgroundColor: isLight ? '#3b82f6' : '#e5e7eb'}} onClick={() => setIsLight(!isLight)}  >
-          <div className={styles.circleStyle} style={{ left: isLight ? '33px' : '4px'}} />
-          </button>
-          <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Light</span>
-       </div>
+         {/* toggler==================toggle theme======================= */}
+            <div className={styles.toggler}>
+                <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Dark</span>
+                <button className={styles.switchStyle}  style={{backgroundColor: isLight ? '#3b82f6' : '#e5e7eb'}} onClick={() => setIsLight(!isLight)}  >
+                <div className={styles.circleStyle} style={{ left: isLight ? '33px' : '4px'}} />
+                </button>
+                <span style={{color: isLight ? 'black': 'white', fontWeight:'500'}}>Light</span>
+             </div>
 
-     {/*================================ share and save btn================================================== */}
-         <div className={styles.sharebtn} onClick={handleShareForm}  disabled={!formSaved}> Share </div>
-        <div className={styles.savebtn} onClick={handleSaveForm}> Save </div>
-        <img src={close} alt="cross Img" className={styles.closeImg} onClick={()=> navigate(-1)}/>
-       </nav>
+              {/* Mobile toggle */}
+                    <div className={styles.mobileToggle} onClick={() => setIsLight(!isLight)}>
+                      <img
+                        src={isLight ? darkModeImg : lightModeImg}
+                        alt="theme toggle"
+                        className={styles.toggleImage}
+                      />
+                    </div>
+
+           {/*================================ share and save btn================================================== */}
+           <div style={{display: 'flex', alignItems: 'center', gap: '10px', order: '2'}}>
+               <div className={styles.sharebtn} onClick={handleShareForm}  disabled={!formSaved}> Share </div>
+              <div className={styles.savebtn} onClick={handleSaveForm}> Save </div>
+              <img src={close} alt="cross Img" className={styles.closeImg} onClick={()=> navigate(-1)}/>
+            </div>
+      </nav>
 
    {/* =====================dashboard body========================================= */}
 
    {mode === 'Flow' ? (
-   <div className={styles.body} style={{backgroundColor: isLight ? 'white': '#1F1F23'}}>
- <div className={styles.sidebar} style={{backgroundColor: isLight ? 'white': '#121212' , border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}>
- <div className={styles.boxHeaderDiv} style={{color: isLight ? 'black': 'white'}} >Bubbles</div>
-       <div className={styles.bubblesBox}>
+    <div className={styles.body} style={{backgroundColor: isLight ? 'white': '#1F1F23'}}>
+      <div className={styles.sidebar} style={{backgroundColor: isLight ? 'white': '#121212' , border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}>
+        <div className={styles.boxHeaderDiv} style={{color: isLight ? 'black': 'white'}} >Bubbles</div>
+          <div className={styles.bubblesBox}>
          <div className={styles.inputBtns} onClick={() => handleAddElement("text")} 
          style={{backgroundColor: isLight ? 'white': '#1F1F23', color: isLight ? 'black': 'white',  border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}>
          <img src={msg} style={{ marginRight: '6px' }} alt="Text" />
@@ -363,12 +398,12 @@ const handleShareForm = () => {
          style={{backgroundColor: isLight ? 'white': '#1F1F23', color: isLight ? 'black': 'white',  border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}>
          <img src={msg} style={{ marginRight: '6px' }} alt="Text" />
            Image</div>
-       </div>
+          </div>
 
-     <div className={styles.boxHeaderDiv} style={{color: isLight ? 'black': 'white'}}>Inputs </div>
-       <div className={styles.inputsBox}>
+        <div className={styles.boxHeaderDiv} style={{color: isLight ? 'black': 'white'}}>Inputs </div>
+          <div className={styles.inputsBox}>
 
-        <div className={styles.inputBtns} onClick={() => handleAddElement('input-text')} 
+          <div className={styles.inputBtns} onClick={() => handleAddElement('input-text')} 
           style={{backgroundColor: isLight ? 'white': '#1F1F23', color: isLight ? 'black': 'white',  border: isLight ? '1px solid #c7c4c4' : '1px solid rgb(74, 71, 71)'}}>
           <img src={t} style={{ marginRight: '6px' }} alt="Text Input" />
            Text
@@ -410,22 +445,20 @@ const handleShareForm = () => {
          <img src={buttons} style={{ marginRight: '6px' }} alt="Button" />
            Button
          </div>
-       </div>
-      
-    
-    
+          </div>
      </div>
 
    <div className={styles.mainContent} >
-         <div className={styles.flag} style={{color: isLight ? 'black': 'white', backgroundColor: isLight ? 'white': '#121212', border: isLight ? '1px solid #c7c4c4' : 'none'}}>
-           <img src={flag} style={{marginRight:'10px', height:'15px'}} />Start</div>
+        <div className={styles.flag} style={{color: isLight ? 'black': 'white', backgroundColor: isLight ? 'white': '#121212', border: isLight ? '1px solid #c7c4c4' : 'none'}}>
+           <img src={flag} style={{marginRight:'10px', height:'15px'}} />Start
+        </div>
           {formElements.map((element) => (<div key={element.id|| element._id}>{renderElement(element)}</div> ))}
    </div>
 
    </div> ): ( <Response workspaceId={workspaceId} formId={formId} fetchedForm={fetchedForm} isLight={isLight}/>)}
 
 
- </div>
+  </div>
 )}
 export default Formbot;
 

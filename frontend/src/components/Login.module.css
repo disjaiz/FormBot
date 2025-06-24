@@ -106,3 +106,43 @@
     z-index: 1; 
     height: 18px;
 }
+
+
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .form{
+        width: 70%;
+    }
+    .triangeImg{
+        left: 4%;
+        top: 54%; 
+        height: 100px;
+    }
+    .triangeImgTwo{
+        left: 1%;
+        top: 56%;        
+        height: 100px;
+    }
+    .rightSemiCircle{
+        height: 100px;
+    }
+    .bottomSemiCircle{
+        height: 70px;
+    }
+
+}
+
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+     .form{
+        width: 70%;
+    }
+    .triangeImg{
+        left: 4%;
+        top: 54%; 
+    }
+    .triangeImgTwo{
+        left: 1%;
+        top: 56%;        
+    }
+}

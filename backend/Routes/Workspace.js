@@ -771,7 +771,13 @@ router.post('/forms/:workspaceId/:formId/submit', async (req, res) => {
       if (!form) return res.status(404).json({msg:'Form not found'});
 
       // Push the submitted values into the form's submissions field
-    form.submissions.push(new Map(Object.entries(inputValues))); // Convert inputValues to Map format
+      
+    // form.submissions.push(new Map(Object.entries(inputValues))); 
+    form.submissions.push({
+  data: new Map(Object.entries(inputValues)),
+  createdAt: new Date()
+});
+
     await workspace.save();
 
       res.status(200).json({msg:'Form submission saved'});

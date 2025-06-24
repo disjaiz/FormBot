@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import styles from "./ShareModal.module.css";
 import closeImg from '../Images/close.png';
 
-const ShareModal = ({ workspaceId, closeModal , isLight }) => {
-    const url = import.meta.env.VITE_BACKEND_URL;
+const ShareModal = ({ workspaceId, closeModal , isLight, setToast }) => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [email, setEmail] = useState("");
     const [accessLevel, setAccessLevel] = useState("edit");
     const [link, setLink] = useState('');
  
   const handleSendInvite = async () => {
     try {
-        const response = await fetch(`${url}/workspace/${workspaceId}/invite`, {
+        const response = await fetch(`${backendUrl}/workspace/${workspaceId}/invite`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -19,33 +19,26 @@ const ShareModal = ({ workspaceId, closeModal , isLight }) => {
             body: JSON.stringify({ email, accessLevel }),
         });
         const res = await response.json();
-
-        if (res.status === 200) {
-            alert(res.message)
-            console.log(res.message);
-        }
-        else if (res.status === 400) {
-            alert(res.message)
-            console.log(res.message);
-        }
-        else if (res.status === 404) {
-            alert(res.message)
-            console.log(res.message);
-        }
-        alert(res.message)
+    if (response.status === 200) {
+        setToast({message:"Invite sent successfully!", bg:"green"});
+    }
+    else{
         console.log(res.message);
+        setToast({message:res.message, bg:"red"});
+        }
+        
     } catch (error) {
         console.error(error);
-        alert('Failed to send invite');
+        setToast("Failed to send invite");
     }
 };
 
     // Handle generating a shareable link
     const handleGenerateLink = () => {
-        const generatedLink = `https://formbot-xyi7.onrender.com/login?returnUrl=/workspace/${workspaceId}/join?accessLevel=${accessLevel}`;
+        const generatedLink = `${backendUrl}/login?returnUrl=/workspace/${workspaceId}/join?accessLevel=${accessLevel}`;
         setLink(generatedLink);
         navigator.clipboard.writeText(generatedLink);
-        alert('Link copied to clipboard');
+        setToast({message:"Link copied!", bg:"green"});
     };
 
 return (

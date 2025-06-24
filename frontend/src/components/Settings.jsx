@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styles from './Settings.module.css'
 import logout from '../Images/logout.png';
+import backArrow from '../Images/arrowBack.png';
 import { useNavigate , useLocation} from 'react-router-dom';
 
 
@@ -111,6 +112,7 @@ function Settings() {
       </div>
 
       <img src={logout} alt="logoutImg" className={styles.logoutImg} onClick={handleLogout}/>
+      <img src={backArrow} alt="go-back" className={styles.backArrowImg} onClick={() => navigate(-1)}/>
     </div>
   )
 }

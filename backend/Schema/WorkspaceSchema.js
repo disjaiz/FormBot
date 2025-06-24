@@ -58,10 +58,10 @@ const workspaceSchema = new mongoose.Schema({
         },
       }],
       submissions: { 
-        type: [{ 
-          type: Map, 
-          of: String, 
-        }], 
+          type: [{
+            data: { type: Map, of: String },
+            createdAt: { type: Date, default: Date.now }
+          }],
         default: [] 
       }
     }

@@ -90,7 +90,7 @@ function Signup() {
            <form onSubmit={handleSignup} className={styles.form}>
 
               <label htmlFor="username" className={styles.lable}>Username</label><br/>
-              <input required type="text" name='username' placeholder='Enter a username' className={styles.inputField}  
+              <input required type="text" name='username' placeholder='Enter a username'  maxLength={10} className={styles.inputField}  
                   value={formData.username} onChange={(e) => {
                     const { name, value } = e.target;
                     const capitalized = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();

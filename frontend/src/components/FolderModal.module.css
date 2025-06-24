@@ -17,8 +17,11 @@
     border: 1.5px solid rgb(90, 87, 87);    
     padding: 23px;
     border-radius: 23px;
-    width: 30%;
-    height: 30%;
+    /* width: 30%; */
+    width: 400px;
+   
+    /* height: 30%; */
+    height: 190px;
     font-family: Open Sans; 
 }
 .deleteModal{
@@ -29,8 +32,10 @@
     border: 1.5px solid rgb(90, 87, 87);    
     padding: 23px;
     border-radius: 23px;
-    width: 30%;
-    height: 25%;
+    /* width: 30%; */
+    width: 400px;
+    /* height: 25%; */
+    height: 150px;
     font-family: Open Sans;    
 }
 .heading{
@@ -72,4 +77,43 @@
     background-color: #090909;
     border: none;
     color: white;
+}
+
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .createModal{      
+        padding: 20px;
+        width: 90%;
+        height: 190px;
+      }
+    .deleteModal{   
+        padding: 20px;
+        width: 90%;
+        height: 160px; 
+    }
+    .done{
+        font-size: 20px;
+    }
+    .cancel{
+        font-size: 20px;
+    }
+}
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+    .createModal{      
+        width: 70%;
+        height: 200px;
+    }
+     .deleteModal{   
+        padding: 20px;
+        max-width: 80%;
+        width: 400px;
+        height: 150px; 
+    }
+    .done{
+        font-size: 20px;
+    }
+    .cancel{
+        font-size: 20px;
+    }
 }

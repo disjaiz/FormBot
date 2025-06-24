@@ -16,7 +16,6 @@ const EndUserForm = () => {
     const [submittedInputs, setSubmittedInputs] = useState(new Set());
     const url = import.meta.env.VITE_BACKEND_URL;
 
-    
     useEffect(() => {
     
         const visitedKey = `visited-form-${formId}`;
@@ -69,8 +68,6 @@ if (shouldIncrement) {
             [id]: value,
         }));
     };
-
-
 
     // Handle individual input submission
     const handleInputSubmit = async(id, type) => {

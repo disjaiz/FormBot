@@ -8,9 +8,6 @@ import { useNavigate } from 'react-router-dom';
 function LandingPage() {
   const url = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
-  const handleLogin = () => {
-    navigate('/login');
-  }
 
   return (
     <div className={styles.container}>
@@ -21,8 +18,8 @@ function LandingPage() {
           </div>
 
           <div className={styles.navButtons}>
-            <button className={styles.signIn} onClick={handleLogin}>Sign in</button>
-            <button className={styles.createFormbot} onClick={handleLogin}>Create a FormBot</button>
+            <button className={styles.signIn} onClick={()=> navigate('/login')}>Sign in</button>
+            <button className={styles.createFormbot} onClick={()=>navigate('/signup')}>Create a FormBot</button>
           </div>
         </nav>
 

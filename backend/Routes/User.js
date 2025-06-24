@@ -102,9 +102,10 @@ router.post('/login', async (req, res)=>{
               sameSite: 'None',
               secure: true,
 
-//                 secure: false,
-//  sameSite: 'Lax',
-              expires: new Date(Date.now() + 18000000),
+              
+          //     sameSite: 'Lax',
+          // secure: false,
+              // expires: new Date(Date.now() + 18000000),
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});

@@ -70,3 +70,12 @@
     padding-left: 35px;
     font-size: 16px;
 }
+
+.backArrowImg{
+    position: absolute;
+    left: 25px; 
+    top: 7%; 
+    transform: translateY(-50%);
+    z-index: 1; 
+    height: 18px;
+}

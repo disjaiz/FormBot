@@ -36,12 +36,11 @@
     border-bottom: 0.1px solid rgb(135, 133, 133);
     height: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     position: relative; 
     padding: 0 20px;
 }
-
 .dropdownSelect{
     position: absolute;
     left: 45%;
@@ -53,28 +52,8 @@
     border: 1px solid rgb(74, 71, 71);
     color: white; 
     font-family: Open Sans;
+    order: 1;
 }
-
-/* .dropdownSelect option:hover {
-    color: orange ;
-} */
-/* .dropdownSelect:focus {
-    outline: none;
-    border: 1px solid rgb(74, 71, 71);
-  } */
-
-.sharebtn{
-    color: white;
-    background-color: #1A5FFF;
-    z-index: 10;
-    position: absolute;
-    right: 4%;
-    padding: 8px 20px;
-    border-radius: 7px;
-    border: none;
-    font-family: Open Sans;
-}
-
 .toggler  {
     z-index: 10;
     position: absolute;
@@ -85,7 +64,23 @@
     display: flex;
     align-items: center; 
     height: 40px; 
+    order: 2;
  }
+.mobileToggle {
+    display: none;
+}
+.sharebtn{
+    color: white;
+    background-color: #1A5FFF;
+    z-index: 10;
+    position: absolute;
+    right: 4%;
+    padding: 8px 20px;
+    border-radius: 7px;
+    border: none;
+    font-family: Open Sans;
+    order: 3;
+}
 /* =======================body==================================== */
 
 .dashboardBody{
@@ -95,7 +90,6 @@
     height:auto;
     width: 100vw;
     padding: 1.5% 15%;
-    /* color: white; */
 }
 .dashboardBodyInner{
     width: 100%;
@@ -151,19 +145,25 @@
 
 .formNameDiv{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
     height: 180px;
     width: 150px;
     border-radius: 7px;
-    padding:25px 10px;
+    padding: 10px;
     background-color: #FFFFFF80;
     margin-right: 15px;
     margin-bottom: 10px;
     font-family: Open Sans;  
     position: relative; 
+    text-align: center;
+}
+.formNameDiv p{
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 .allForms{
     width: 100%;
@@ -181,13 +181,146 @@
     height: 20px;
     width: 20px;
     color: #c7c4c4;
-   
 }
 
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .nav{ 
+        justify-content: space-evenly;
+        padding: 0px;
+        position: static;
+    }
+    .dropdownSelect{
+        position: static;
+        width: 180px;
+        padding: 8px 10px;
+        transform: none; 
+        order: 2;
+    }
+    .toggler  {
+        display: none;
+     }
+    .mobileToggle {
+        z-index: 10;
+        position: static;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        order: 1;
+     }
+     .toggleImage {
+        width: 100%;
+        height: 100%;
+    }      
+    .sharebtn{
+        position: static;
+        padding: 6px 9px;
+        font-size: 13px;
+        order: 3;
+    }
+    .dashboardBody{
+        padding: 20px 5%;
+    }
+    .createfolderbtn{
+        padding: 8px 10px;
+        font-size: 12px;
+        margin-right: 10px;
+     }
+    .folderNameDiv{
+        padding: 8px 10px;
+        margin-right: 10px;
+    }
+    .folderNameDiv p{
+        font-size: 12px !important;
+    }
+    .typeBotBtn{
+        height: 120px;
+        width: 100px;
+        padding: 20px 0px;
+        margin-right: 8px;
+    }
+    .typeBotBtn img{
+         height: 20px !important;
+         width: 20px !important;
+    }
+    .typeBotBtn p{
+         font-size: 10px !important;
+    }
+    .formNameDiv{
+        height: 120px;
+        width: 100px; 
+        padding: 10px;
+        margin-right: 8px;
+    }
+    .deleteFormbtn{
+    right: -5%;
+    top: -5%;
+    transform: translate(5%, 5%);
+    height: 15px;
+    width: 15px;
+}
+}
 
-  
-
- 
-
-
-
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+    .toggler  {
+        display: none;
+     }
+    .dropdownSelect{
+        width: 200px;
+        order: 2;
+    }
+    .mobileToggle {
+        z-index: 10;
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        right: 20%;
+        display: flex;
+        align-items: center; 
+        order: 1;
+     }
+     .toggleImage {
+        width: 100%;
+        height: 100%;
+    }
+    .sharebtn{
+        padding: 8px 10px;
+        font-size: 15px;
+        order: 3;
+    }
+    .dashboardBody{
+        padding: 20px 5%;
+    }  
+    .createfolderbtn{
+        padding: 8px 10px;
+        font-size: 14px;
+        margin-right: 10px;
+     }
+    .folderNameDiv{
+        padding: 8px 10px;
+        margin-right: 10px;
+    }
+    .folderNameDiv p{
+        font-size: 14px !important;
+    } 
+    .typeBotBtn{
+        height: 150px;
+        width: 120px;
+        padding: 20px 0px;
+        margin-right: 10px;
+    }
+    .typeBotBtn img{
+         height: 25px !important;
+         width: 25px !important;
+    }
+    .typeBotBtn p{
+         font-size: 12px !important;
+    }
+    .formNameDiv{
+        height: 150px;
+        width: 120px; 
+        padding: 10px;
+        margin-right: 10px;
+    }
+}

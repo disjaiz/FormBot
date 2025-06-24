@@ -1,10 +1,13 @@
 .container{
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
     color: white;
     width: 100vw;
-    padding: 10px 100px;
+    height: 100%;
+    padding: 20px 100px;
+    overflow: hidden; 
+    overflow-y: scroll;
+
 }
 .countsDiv{
     display: flex;
@@ -43,4 +46,81 @@
     font-family: Open Sans;
     height: 100px;
     padding: 0 30px;
+}
+.tableContainer {
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.table {
+     border-collapse: collapse;
+    width: 100%;
+}
+
+.table th, .table td {
+    border: 1px solid grey;
+    padding: 8px;
+    text-align: left;
+}
+
+
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .container {
+        padding: 20px 10px 70px 10px;
+    }
+    .countsDiv {
+        padding: 0 20px;
+    }
+    .counts {
+        padding: 10px 20px;
+    }
+   .completionDiv{
+    padding: 0 10px;
+    justify-content: space-between; 
+    }
+    .completionRate{
+        text-align: center;
+        height: 80px;
+        width: 40%;
+        padding: 0;
+    }
+    .completionRate p{
+        font-size: 12px;
+    }
+    .tableContainer {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .table {
+        font-size: 12px;
+     }
+
+    .table td, .table th {
+        padding: 6px;
+    }
+}
+
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+    .container {
+        padding: 20px 40px;
+    }
+    .countsDiv, .completionDiv {
+        padding: 0 20px;
+    }
+    .counts, .completionRate {
+        padding: 10px 20px;
+    }
+    .tableContainer {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .table {
+        font-size: 14px;
+    }
+    .table td, .table th {
+        padding: 6px;
+    }
 }

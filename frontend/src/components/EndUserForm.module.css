@@ -79,11 +79,12 @@
   justify-content: center;
   align-items: center;
 } */
-
+/* =================================================================================================== */
 .container {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  /* background-color: green; */
 }
 
 .formContainer {
@@ -91,8 +92,8 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
+  /* background-color: green; */
 }
-
 
 .leftSide, .rightSide {
   flex: 1;

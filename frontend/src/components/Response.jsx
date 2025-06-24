@@ -10,28 +10,32 @@ function Response({workspaceId, formId, fetchedForm, isLight}) {
   const url = import.meta.env.VITE_BACKEND_URL;
 
   const [submissionsArray, setSubmissionsArray] = useState([])
+  const [filteredFormData, setFilteredFormData] = useState([])
+
 
      useEffect(() => {
        const fetchFormSubmissions = async () => {
            try {
                const response = await fetch(`${url}/workspace/forms/${workspaceId}/${formId}/submissions`);
                const submissionData = await response.json();
-   
-               console.log('Form Submissions:', submissionData);
      
            } catch (err) {
                console.log('Error fetching form submissions:', err);
            }
 
-           console.log(fetchedForm);
-           setFormStart(fetchedForm.formStart);
-           setFormSubmission(fetchedForm.formSubmission);
+          console.log('fetchedForm:', fetchedForm);
+          setFormStart(fetchedForm.formStart);
+          setFormSubmission(fetchedForm.formSubmission);
           setAccessCount(fetchedForm.accessCount);
           setSubmissionsArray(fetchedForm.submissions);
-          console.log(fetchedForm.submissions);  
-  
+
+          const filteredFormData = Object.values(fetchedForm.formData).filter(
+            item => !['text', 'image', 'input-button'].includes(item.type)
+          );
+          console.log('Filtered Form Data:', submissionsArray);
+          setFilteredFormData(filteredFormData);
        };
-       fetchFormSubmissions();
+        fetchFormSubmissions();
    }, [workspaceId, formId]);
 
 
@@ -48,24 +52,77 @@ function Response({workspaceId, formId, fetchedForm, isLight}) {
         <p> {formStart}</p></div>
       </div>
 
-{/* ========= pie chart ============= */}
+      {/* ========= pie chart ============= */}
       <div className={styles.completionDiv}> 
-      <PieChart
+         {/* <PieChart
+            data={[
+              { title: 'One', value: formSubmission, color: '#3B82F6' },
+              { title: 'Two', value: formStart-formSubmission, color: '#909090' },
+            ]}
+            innerRadius={0.5} 
+            radius={50} 
+            lineWidth={30}
+            style={{ width: '200px', height: '200px' }} /> */}
+        <div className={styles.pieChartContainer}>
+        <PieChart
   data={[
     { title: 'One', value: formSubmission, color: '#3B82F6' },
-    { title: 'Two', value: formStart, color: '#909090' },
+    { title: 'Two', value: formStart - formSubmission, color: '#909090' },
   ]}
-  innerRadius={0.5} 
-  radius={50} 
+  innerRadius={0.5}
+  radius={50}
   lineWidth={30}
-  style={{ width: '200px', height: '200px' }} />
+  style={{ 
+    width: '200px', 
+    height: '200px',
+    maxWidth: '100%',
+    transform: window.innerWidth < 600 ? 'scale(0.7)' : 'scale(1)',
+  }}
+/>
 
-      <div className={styles.completionRate}>
-        <p>Completion rate</p>
-        <p>{formSubmission/formStart}%</p>
+            </div>
+  
+        <div className={styles.completionRate}>
+          <p>Completion rate</p>
+          <p>{Math.round((formSubmission / formStart) * 100)}%</p>
+        </div>
       </div>
-      </div>
-      
+
+      {/* ======== submissions data table======== */}
+<div className={styles.tableContainer}>
+ <table className={styles.table}>
+  <thead>
+    <tr>
+      <th>📅 Submitted at</th>
+      {filteredFormData.map(field => (
+        <th key={field._id}>{field.value}</th>
+      ))}
+    </tr>
+  </thead>
+
+  <tbody>
+    {submissionsArray.map((submission, index) => (
+      <tr key={index}>
+        <td>
+          {new Date(submission.createdAt).toLocaleString('en-US', {
+          month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'
+          })}
+        </td>
+
+        {filteredFormData.map(field => (
+          <td key={field._id}>
+            {/* {submission[field._id] || ''} */}
+               {submission.data?.[field._id] || ''}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+
+
+
     </div>
   )
 }
