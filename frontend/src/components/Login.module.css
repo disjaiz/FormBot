@@ -48,12 +48,11 @@
     font-size: 14px;
     position: relative;
 }
-<<<<<<< HEAD
+
 .buttons:active {
   transform: scale(0.97);
 }
-=======
->>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
+
 
 .gImgBg{
     position: absolute;
