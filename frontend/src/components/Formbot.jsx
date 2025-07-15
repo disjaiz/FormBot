@@ -304,11 +304,7 @@ const handleShareForm = () => {
  if (formId) {
    const shareLink = `${window.location.origin}/forms/${workspaceId}/${formId}`;
   //  alert(`Share this link: ${shareLink}`);
-<<<<<<< HEAD
-  
-=======
-  //  setToast({ message: 'Link copied to clipboard!', bg: 'green' });
->>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
+
    // Copy the link to clipboard
    navigator.clipboard.writeText(shareLink).then(() => {
     setToast({ message: 'Link copied to clipboard!', bg: 'green' });
