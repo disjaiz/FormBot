@@ -63,12 +63,18 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
+<<<<<<< HEAD
             sameSite: 'None',    // live (production)
             secure: true,        // live (production)
 
           //    sameSite: 'Lax',   //testing (development)
           // secure: false,       //testing (development)
             //  expires: new Date(Date.now() + 18000000),
+=======
+            sameSite: 'None',
+            secure: true,
+             expires: new Date(Date.now() + 18000000),
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -102,12 +108,21 @@ router.post('/login', async (req, res)=>{
             res.cookie('Token', token, {
               maxAge: 5 * 60 * 60 * 1000,
               httpOnly: true,
+<<<<<<< HEAD
               sameSite: 'None',  // live (production)
               secure: true,      // live (production)
 
               
           //     sameSite: 'Lax',       //testing (development)
           // secure: false,              //testing (development)
+=======
+              sameSite: 'None',
+              secure: true,
+
+              
+          //     sameSite: 'Lax',
+          // secure: false,
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
               // expires: new Date(Date.now() + 18000000),
               });
           

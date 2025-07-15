@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from './EndUserForm.module.css';
 import { useParams } from "react-router-dom";
 import send from '../Images/send.png';
+<<<<<<< HEAD
 import Toast from '../Toast';
 
 const EndUserForm = () => {
     const [toast, setToast] = useState(null);
+=======
+
+const EndUserForm = () => {
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
     const {workspaceId, formId } = useParams();
     const [formElements, setFormElements] = useState([]);
     const [inputValues, setInputValues] = useState({});
@@ -19,6 +24,7 @@ const EndUserForm = () => {
     const url = import.meta.env.VITE_BACKEND_URL;
 
     useEffect(() => {
+<<<<<<< HEAD
         const visitedKey = `visited-form-${formId}`;
         const shouldIncrement = !localStorage.getItem(visitedKey);
 
@@ -29,6 +35,18 @@ const EndUserForm = () => {
                 .catch(err => console.error('Error incrementing access count:', err));
         }
 
+=======
+    
+        const visitedKey = `visited-form-${formId}`;
+    const shouldIncrement = !localStorage.getItem(visitedKey);
+
+if (shouldIncrement) {
+    localStorage.setItem(visitedKey, 'true');
+    fetch(`/workspace/track-form-access/${workspaceId}/${formId}`, { method: 'POST' })
+        .then(() => console.log('Access count incremented'))
+        .catch(err => console.error('Error incrementing access count:', err));
+}
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
         const trackFormLinkAccess = async () => {
             try {
                 const response = await fetch(`${url}/workspace/track-form-access/${workspaceId}/${formId}`, {
@@ -55,7 +73,11 @@ const EndUserForm = () => {
                 }
                 const data = await response.json();
                 setFormElements(data.form.formData);
+<<<<<<< HEAD
                 // console.log(data);
+=======
+                console.log(data);
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
             } catch (err) {
                 console.error("Failed to fetch form:", err);
             }
@@ -113,8 +135,12 @@ const EndUserForm = () => {
 
     // Handle final form submission
     const handleFinalSubmit = async () => {
+<<<<<<< HEAD
         setToast({message:"Form submitted successfully!", bg:"green"});
         // alert('Form submitted successfully');
+=======
+        alert('Form submitted successfully');
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
         setFormSubmitted(true);
         setFinalFormSubmissions(prev => prev + 1); // Increment form submission count
 
@@ -149,7 +175,11 @@ const EndUserForm = () => {
             console.error('Error submitting form:', err);
         }
 
+<<<<<<< HEAD
         // console.log('Form Submitted:', inputValues);
+=======
+        console.log('Form Submitted:', inputValues);
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
     };
 
 
@@ -157,6 +187,7 @@ const EndUserForm = () => {
     .filter(element => element.type.startsWith('input-') && element.type !== 'input-button')
     .every(element => submittedInputs.has(element._id));
    
+<<<<<<< HEAD
 // ============================================================================================================================================
     return (
         <div className={styles.container}>
@@ -168,14 +199,24 @@ const EndUserForm = () => {
                           bgColor={toast.bg}
                         />
                       )}
+=======
+
+    return (
+        <div className={styles.container}>
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
           
             <form className={styles.formContainer}>
                 {formElements.map((element) => {
                     if (element.type === 'text' || element.type === 'image') {
                         return (
                             <div key={element._id} className={styles.bubble}>
+<<<<<<< HEAD
                                 {element.type === 'text' && <p className={styles.bubbleText}>{element.value}</p>}
                                 {element.type === 'image' && <img src={element.value} alt="Form image" className={styles.bubbleImage}/>}
+=======
+                                {element.type === 'text' && <p>{element.value}</p>}
+                                {element.type === 'image' && <img src={element.value} alt="Form image" style={{height:"200px", width:'200px', borderRadius:'3px'}} />}
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
                             </div>
                         );
                     }
@@ -183,6 +224,7 @@ const EndUserForm = () => {
                     if (element.type.startsWith('input-') && element.type !== 'input-button') {
                         return (
                             <div key={element._id} className={styles.inputContainer}>
+<<<<<<< HEAD
                                 {!element.type.startsWith('input-rating') && 
                                     <input
                                         type={element.inputType}
@@ -195,6 +237,19 @@ const EndUserForm = () => {
                                 } 
                                  {element.type === 'input-rating' && (
                                   <div style={{ display:'block'}}  className={styles.input}>
+=======
+                          {!element.type.startsWith('input-rating') && 
+                                     <input
+                                    type={element.inputType}
+                                    value={inputValues[element._id] || ''}
+                                    onChange={(e) => handleInputChange(element._id, e.target.value)}
+                                    placeholder={element.inputType}
+                                    className={styles.input}
+                                />
+                                } 
+                                    {element.type === 'input-rating' && (
+                                <div style={{ display:'block'}}  className={styles.input}>
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
                                     {[1, 2, 3, 4, 5].map(star => (
                                         <span
                                             key={star}
@@ -210,6 +265,7 @@ const EndUserForm = () => {
                                 </div>
                             )}
                                 <div
+<<<<<<< HEAD
                                     type="button"
                                     // onClick={() => handleInputSubmit(element._id, element.type)}
                                     onClick={() => {
@@ -242,6 +298,12 @@ const EndUserForm = () => {
                                         height:'25px', 
                                         width:"25px", 
                                         borderRadius:'3px'}}/>
+=======
+                                    // type="button"
+                                    onClick={() => handleInputSubmit(element._id, element.type)}
+                                >
+                                    <img src={send} alt="arrow" style={{backgroundColor:'blue', height:'25px', width:"25px", borderRadius:'3px'}}/>
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
                                 </div>
                             </div>
                         );
@@ -254,16 +316,27 @@ const EndUserForm = () => {
                     if (element.type === 'input-button') {
                         return (
                             <div key={element._id} className={styles.finalSubmitDiv}>
+<<<<<<< HEAD
                                    {/* {allInputsSubmitted && ( */}
+=======
+                                   {allInputsSubmitted && (
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
                                 <button
                                     type="button"
                                     onClick={handleFinalSubmit}
                                     className={styles.finalSubmitButton}
+<<<<<<< HEAD
                                     disabled={!allInputsSubmitted}
                                 >
                                     Submit Form
                                 </button>
                                  {/* )} */}
+=======
+                                >
+                                    Submit Form
+                                </button>
+                                 )}
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
                             </div>
                         );
                     }

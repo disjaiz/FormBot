@@ -26,6 +26,7 @@ function Signup() {
   })
    const [error, setError] = useState(null);
    const [toast, setToast] = useState(null);
+<<<<<<< HEAD
 
    const [loading, setLoading] = useState(false);
 
@@ -35,6 +36,11 @@ function Signup() {
 
          if (loading) return; // 🔒 Prevent multiple clicks
     setLoading(true);
+=======
+      // handle signup=======================================
+       const handleSignup = async (e) => {
+        e.preventDefault()
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
         
       try{
         const response = await signup(formData)
@@ -67,8 +73,12 @@ function Signup() {
           setError("Something went wrong. Please try again.");
           console.error(signupData); 
       }
+<<<<<<< HEAD
     }
     catch(err){
+=======
+    }catch(err){
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
       switch (err.message) {
             case "network_error":
               setError("No internet or server is unreachable.");
@@ -77,9 +87,12 @@ function Signup() {
               setError("Unexpected error. Please try again later.");
           }
   }
+<<<<<<< HEAD
   finally {
     setLoading(false); // 🧹 Always release lock, success or fail
   }
+=======
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
   }
   
       // handle login=======================================

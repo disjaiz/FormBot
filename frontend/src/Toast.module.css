@@ -1,7 +1,11 @@
 .toast {
   position: fixed;
+<<<<<<< HEAD
   /* top: 20px; */
   bottom: 20px;
+=======
+  top: 20px;
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
   right: 20px;
   color: white;
   padding: 10px 16px;
@@ -11,11 +15,19 @@
   z-index: 10000;
   font-size: 16px;
   min-width: 200px;
+<<<<<<< HEAD
   font-family: Poppins;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+=======
+  font-family: Roboto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 .closeBtn {
   background: none;
   border: none;

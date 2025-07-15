@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* .container {
   padding: 2rem;
   max-width: 1200px;
@@ -5,6 +6,95 @@
   background-color: rgb(224, 135, 150);
   min-height: 100vh;
   height: auto;
+=======
+/* .mainContent {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(254, 250, 245);
+  padding: 30px 100px;
+}
+.formContainer{
+  height: 100%;
+  width: 100%;
+}
+.box{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+}
+.leftSide, .rightSide {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+  font-family: Open Sans;
+  color: #847F7F;
+}
+.finalSubmitContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.finalSubmitBtn {
+  width: 10%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: blue;
+  border-radius: 6px;
+  border: none;
+  color: white;
+}
+.card{
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.bubble{
+  width: 100%;
+}
+.bubbleText{
+ font-size: 17px;
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f5f1f1; 
+ border-radius: 5px;
+ padding: 5px 10px;
+ width: fit-content;
+}
+.bubbleImage{
+  width: 250px;
+  height: 180px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cardInput{
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f5f1f1; 
+ border-radius: 5px;
+ padding: 5px 10px;
+ width: fit-content;
+ margin-right: 50px;
+ font-family: Open Sans;
+ font-size: 17px;
+}
+.submitBtn{
+  padding:  5px 8px;
+  background-color: #1A5FFF;
+  border-radius: 3px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+/* =================================================================================================== */
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* background-color: green; */
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 }
 
 .formContainer {
@@ -12,7 +102,11 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
+<<<<<<< HEAD
   background-color: rgb(228, 221, 221);
+=======
+  /* background-color: green; */
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 }
 
 .leftSide, .rightSide {
@@ -34,6 +128,7 @@
   border-radius: 12px;
   font-family: Open Sans;
 }
+<<<<<<< HEAD
 .bubbleText {
   font-family: Poppins;
   font-weight: 500;
@@ -46,6 +141,17 @@
   width: auto;
   border-radius:3px;
   object-fit: contain;
+=======
+
+.bubbleText {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bubbleImage {
+  max-width: 100%;
+  border-radius: 8px;
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 }
 
 .inputContainer {
@@ -53,6 +159,10 @@
   gap: 1rem;
   align-items: center;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 .input {
   width: auto;
   padding: 0.70rem;
@@ -60,7 +170,11 @@
   border-radius: 6px;
   font-size: 1rem;
   margin-bottom: 20px;
+<<<<<<< HEAD
   margin-left: 25%;
+=======
+  margin-left: 20%;
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
 }
 
 .finalSubmitDiv{
@@ -83,6 +197,7 @@
   padding: 5px 8px;
   border-radius: 6px;
   border: none;
+<<<<<<< HEAD
 } */
 
 
@@ -236,3 +351,7 @@
   }
   }
 
+=======
+}
+
+>>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
