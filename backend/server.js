@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const app = express();
 
 const port = 3000;
-<<<<<<< HEAD
+
 // const frontendUrl = "http://localhost:5173";
 // const frontendUrl = "http://192.168.0.105:5173";
-=======
-const localfrontendUrl = "http://localhost:5173";
->>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
+
 const frontendUrl = "https://formbot-xyi7.onrender.com";
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
@@ -19,11 +17,7 @@ const routerUser = require('./Routes/User.js');
 
 const cors = require('cors');
 app.use(cors({
-<<<<<<< HEAD
   origin: [frontendUrl ],
-=======
-  origin: [frontendUrl],
->>>>>>> 3236942fdcd92b3ef104e5adb43ba9bf7c154307
   credentials: true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
