@@ -1,0 +1,81 @@
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    background-color: #121212;
+    /* color: white; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 70px;
+}
+.innerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    height: auto;
+    padding: 20px;
+    font-family: Open Sans;
+}
+.header{
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+.updateForm{
+    width: 100%;  
+}
+.input{
+    width: 100%;
+    border-radius: 7px;
+    padding: 10px 5px;
+    margin-bottom: 14px;
+    background-color: transparent;
+    border: 1px solid rgb(100, 95, 95);
+    color: white;
+}
+.input:focus {
+    outline: none;
+    border: 1px solid rgb(74, 71, 71);
+  }
+.updatebtn{
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 15px;
+   background-color: #1A5FFF;
+   border: none;
+   color: #ffffff;
+   margin-top: 10px;
+}
+
+.logoutImg{
+    position: absolute;
+    left: 3%;
+    bottom: 5%;
+    
+}
+.personIcon{
+    background: url('../Images/updatePerson.png') no-repeat left center;
+    background-size: 20px 20px; 
+    background-position: 10px center; 
+    padding-left: 35px;
+    font-size: 16px;
+}
+.lockIcon{
+    background: url('../Images/updateLock.png') no-repeat left center;
+    background-size: 20px 20px; 
+    background-position: 10px center; 
+    padding-left: 35px;
+    font-size: 16px;
+}
+
+.backArrowImg{
+    position: absolute;
+    left: 25px; 
+    top: 7%; 
+    transform: translateY(-50%);
+    z-index: 1; 
+    height: 18px;
+}

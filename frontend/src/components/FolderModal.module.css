@@ -1,0 +1,119 @@
+/* ------ Folder Modal Css */
+
+.container{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.createModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgb(90, 87, 87);    
+    padding: 23px;
+    border-radius: 23px;
+    /* width: 30%; */
+    width: 400px;
+   
+    /* height: 30%; */
+    height: 190px;
+    font-family: Open Sans; 
+}
+.deleteModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgb(90, 87, 87);    
+    padding: 23px;
+    border-radius: 23px;
+    /* width: 30%; */
+    width: 400px;
+    /* height: 25%; */
+    height: 150px;
+    font-family: Open Sans;    
+}
+.heading{
+    font-size: 22px;
+    margin-bottom: 20px;  
+    color: white;    
+}
+.input{
+    background-color: #1F1F23;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    padding: 13px 15px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    color: white;   
+}
+.input:focus {
+    outline: none;
+    border: 1px solid rgb(74, 71, 71);
+  }
+
+.btnDiv{
+    display: grid;
+    gap : 1px;
+    width: 100%;   
+    background-color: rgb(105, 102, 102); 
+    grid-template-columns: 1fr 1fr;
+}
+.done{
+    color: #4B83FF;
+    border-right: 1.5px solid rgb(90, 87, 87);
+    font-size: 22px;
+    background-color: #090909;
+    border: none;  
+}
+.cancel{
+    font-size: 22px;
+    background-color: #090909;
+    border: none;
+    color: white;
+}
+
+/* mobile screens */
+@media screen and (max-width: 375px) {
+    .createModal{      
+        padding: 20px;
+        width: 90%;
+        height: 190px;
+      }
+    .deleteModal{   
+        padding: 20px;
+        width: 90%;
+        height: 160px; 
+    }
+    .done{
+        font-size: 20px;
+    }
+    .cancel{
+        font-size: 20px;
+    }
+}
+/* laptop screens */
+@media (min-width: 376px) and (max-width: 765px) {
+    .createModal{      
+        width: 70%;
+        height: 200px;
+    }
+     .deleteModal{   
+        padding: 20px;
+        max-width: 80%;
+        width: 400px;
+        height: 150px; 
+    }
+    .done{
+        font-size: 20px;
+    }
+    .cancel{
+        font-size: 20px;
+    }
+}
